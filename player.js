@@ -4,7 +4,7 @@ module.exports = {
   VERSION: "0.0.10",
 
   bet_request: function (game_state, bet) {
-    var highCards = ['10', 'J', 'Q', 'K', 'A'];
+    var highCards = ['J', 'Q', 'K', 'A'];
     var smallCardsForPair = ['2', '3', '4', '5'];
     var betTreshold = 0.2; //10% of player money, see isBetNotBig() function
     var smallPairBetMultiplier = 0.7;
@@ -50,7 +50,7 @@ module.exports = {
         //All in!
         bet(player.stack);
       }
-    } else if (isBetNotBig() && isCardNotEmpty() && isHighCardPresent()) {
+    } else if (/*isBetNotBig() &&*/ isCardNotEmpty() && isHighCardPresent()) {
       bet(minBet + game_state.minimum_raise);
     } else {
       bet(0);
