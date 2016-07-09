@@ -69,8 +69,8 @@ module.exports = {
     }
 
     function manyPlayersCanPlay() {
-      //return getActivePlayersCount() > playersTreshold;
-      return true;
+      return getActivePlayersCount() > playersTreshold;
+      //return true;
     }
 
     function getAllIn() {
