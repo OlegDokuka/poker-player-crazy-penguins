@@ -49,9 +49,9 @@ module.exports = {
             //All in!
             bet(player.stack);
           }
-    } else if (/*isBetNotBig() &&*/ isCardNotEmpty() && isHighCardPresent()) {
+    // } else if (/*isBetNotBig() &&*/ isCardNotEmpty() && isHighCardPresent()) {
     //     bet(minBet + game_state.minimum_raise);
-    // } else {
+    } else {
         bet(0);
     }
   },
