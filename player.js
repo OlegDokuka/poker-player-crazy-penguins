@@ -9,7 +9,7 @@ module.exports = {
 
     var smallCardsForPair = ['2', '3', '4', '5'];
     var betTreshold = 0.2; //prcentages of player money, see isBetNotBig() function
-    var playersTreshold = 3;
+    var playersTreshold = 2;
     var allInStep = 0.25;
     var smallPairBetMultiplier = 0.7;
     var player = game_state.players[game_state.in_action];
