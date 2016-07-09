@@ -74,7 +74,7 @@ module.exports = {
           //All in!
           getAllIn();
         } else if (/*isBetNotBig() &&*/ isCardNotEmpty() && isHighCardPresent()) {
-            bet(minBet + game_state.minimum_raise);
+            bet(minBet/* + game_state.minimum_raise*/);
         } else {
             bet(0);
         }
