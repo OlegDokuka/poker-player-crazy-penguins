@@ -37,7 +37,7 @@ module.exports = {
     }
 
     function isCardNotEmpty() {
-      return player.hole_cards[0] && player.hole_cards[1];
+      return player.hole_cards.length > 0
     }
 
     function isPairCards() {
