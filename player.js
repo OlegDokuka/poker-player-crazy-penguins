@@ -1,3 +1,4 @@
+
 var NAME = "Crazy Penguins";
 var indetifier = require('./indetifier');
 
@@ -56,7 +57,7 @@ module.exports = {
 
     function isAnyPlaybleCombination() {
       indetifier.setCards(player.hole_cards, game_state.community_cards);
-      return indetifier.isPair() || indetifier.isTriple() || indetifier.isTwoPairs() || indetifier.isKare() || indetifier.isFullHouse();
+      return (indetifier.isPair() && isHighCardPresent()) || indetifier.isTriple() || indetifier.isTwoPairs() || indetifier.isKare() || indetifier.isFullHouse() || identifier.isFlush();
     }
 
     var minBet = getMinBetForKeepPlaying();
@@ -79,11 +80,11 @@ module.exports = {
       bet(Math.round(minBet + (player.stack * allInStep)));
     }
 
-    if (isCardNotEmpty() && isPairCards() && isHighCardPresent()) {
+    if (isCardNotEmpty() && isAnyPlaybleCombination()) {
       //All in!
       getAllIn();
     } else if (!manyPlayersCanPlay()) {
-      if (isCardNotEmpty() && isPairCards() && isHighCardForLessPeoplePresent()) {
+      if (isCardNotEmpty() && (identifier.isPair() && isHighCardForLessPeoplePresent())) {
         //All in!
         getAllIn();
       } else if (/*isBetNotBig() &&*/ isCardNotEmpty() && isHighCardPresent()) {
@@ -100,3 +101,4 @@ module.exports = {
 
   }
 };
+
