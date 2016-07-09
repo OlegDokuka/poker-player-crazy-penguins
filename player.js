@@ -4,7 +4,7 @@ module.exports = {
   VERSION: "0.1.1",
 
   bet_request: function (game_state, bet) {
-    var highCards = ['J', 'Q', 'K', 'A'];
+    var highCards = ['10', 'J', 'Q', 'K', 'A'];
     var smallCardsForPair = ['2', '3', '4', '5'];
     var betTreshold = 0.2; //10% of player money, see isBetNotBig() function
     var smallPairBetMultiplier = 0.7;
@@ -29,10 +29,10 @@ module.exports = {
     }
 
     function isSmallCardPresent(){
-      // return smallCardsForPair.some(function (cardsElement) {
-      //   return player.hole_cards[0].rank == cardsElement || player.hole_cards[1].rank == cardsElement;
-      // });
-        return false;
+      return smallCardsForPair.some(function (cardsElement) {
+        return player.hole_cards[0].rank == cardsElement || player.hole_cards[1].rank == cardsElement;
+      });
+        // return false;
     }
 
     var minBet = getMinBetForKeepPlaying();
@@ -41,14 +41,9 @@ module.exports = {
         return minBet < player.stack * betTreshold;
     }
 
-    if (isCardNotEmpty() && isPairCards()) {
-        if (isSmallCardPresent()) {
-          //70% of all in!
-            bet(Math.round(player.stack * smallPairBetMultiplier));
-        } else {
-            //All in!
-            bet(player.stack);
-          }
+    if (isCardNotEmpty() && isPairCards() && isHighCardPresent()) {
+      //All in!
+      bet(player.stack);
     // } else if (/*isBetNotBig() &&*/ isCardNotEmpty() && isHighCardPresent()) {
     //     bet(minBet + game_state.minimum_raise);
     } else {
