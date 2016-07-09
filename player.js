@@ -1,6 +1,6 @@
-
 var NAME = "Crazy Penguins";
 var indetifier = require('./indetifier');
+global.map = global.map || [];
 
 module.exports = {
 
@@ -20,6 +20,20 @@ module.exports = {
     function getMinBetForKeepPlaying() {
       //return game_state.players.reduce(function (p, n) { return n.bet > p ? n.bet : p }, 0);
         return game_state.current_buy_in;
+    }
+
+    function getGameBetRound() {
+      var round = map[game_state.game_id];
+      if (round != undefined) {
+        round++;
+      } else {
+        map = [];
+        round = 0;
+      }
+
+      map[game_state.game_id] = round;
+
+      return round;
     }
 
     function isCardNotEmpty() {
