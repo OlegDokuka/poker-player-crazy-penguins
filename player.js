@@ -98,7 +98,7 @@ module.exports = {
       //All in!
       getAllIn();
     } else if (!manyPlayersCanPlay()) {
-      if (isCardNotEmpty() && (identifier.isPair() && isHighCardForLessPeoplePresent())) {
+      if (isCardNotEmpty() && (indetifier.isPair() && isHighCardForLessPeoplePresent())) {
         //All in!
         getAllIn();
       } else if (/*isBetNotBig() &&*/ isCardNotEmpty() && isHighCardPresent()) {
