@@ -30,9 +30,10 @@ module.exports = {
     }
 
     function isSmallCardPresent(){
-      return smallCardsForPair.some(function (cardsElement) {
-        return player.hole_cards[0].rank == cardsElement || player.hole_cards[1].rank == cardsElement;
-      });
+      // return smallCardsForPair.some(function (cardsElement) {
+      //   return player.hole_cards[0].rank == cardsElement || player.hole_cards[1].rank == cardsElement;
+      // });
+      return false;
     }
 
     var minBet = getMinBetForKeepPlaying();
