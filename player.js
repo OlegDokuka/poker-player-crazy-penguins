@@ -4,7 +4,7 @@ var indetifier = require('./indetifier');
 
 module.exports = {
 
-  VERSION: "0.2.1",
+  VERSION: "0.2.2",
 
   bet_request: function (game_state, bet) {
     var highCards = ['10', 'J', 'Q', 'K', 'A'];
