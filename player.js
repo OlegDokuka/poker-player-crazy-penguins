@@ -1,4 +1,6 @@
 var NAME = "Crazy Penguins";
+var indetifier = require('./indetifier');
+
 module.exports = {
 
   VERSION: "0.2.1",
@@ -14,16 +16,16 @@ module.exports = {
     var smallPairBetMultiplier = 0.7;
     var player = game_state.players[game_state.in_action];
 
-    function getMinBetForKeepPlaying(){
-        return game_state.players.reduce(function (p, n) { return n.bet > p ? n.bet : p }, 0);
-    }
-    
-    function isCardNotEmpty(){
-        return player.hole_cards[0] && player.hole_cards[1];
+    function getMinBetForKeepPlaying() {
+      return game_state.players.reduce(function (p, n) { return n.bet > p ? n.bet : p }, 0);
     }
 
-    function isPairCards(){
-        return player.hole_cards[0].rank == player.hole_cards[1].rank;
+    function isCardNotEmpty() {
+      return player.hole_cards[0] && player.hole_cards[1];
+    }
+
+    function isPairCards() {
+      return player.hole_cards[0].rank == player.hole_cards[1].rank;
     }
 
     function isCardPresent(array) {
@@ -32,25 +34,34 @@ module.exports = {
       });
     }
 
-    function isHighCardPresent(){
+    function isHighCardPresent() {
       return isCardPresent(highCards);
     }
 
-    function isHighCardForLessPeoplePresent(){
+    function isHighCardForLessPeoplePresent() {
       return isCardPresent(highCardsForLessPeople);
     }
 
-    function isSmallCardPresent(){
+    function isSmallCardPresent() {
       return smallCardsForPair.some(function (cardsElement) {
         return player.hole_cards[0].rank == cardsElement || player.hole_cards[1].rank == cardsElement;
       });
-        // return false;
+      // return false;
+    }
+
+    function isPostFlop() {
+      return game_state.community_cards.length > 0;
+    }
+    
+    function isAnyPlaybleCombination() {
+      indetifier.setCards(player.hole_cards, game_state.community_cards);
+      return indetifier.isPair() || indetifier.isTriple() || indetifier.isTwoPairs() || indetifier.isKare() || indetifier.isFullHouse();
     }
 
     var minBet = getMinBetForKeepPlaying();
 
-    function isBetNotBig(){
-        return minBet < player.stack * betTreshold;
+    function isBetNotBig() {
+      return minBet < player.stack * betTreshold;
     }
 
     function getActivePlayersCount() {
@@ -58,11 +69,11 @@ module.exports = {
     }
 
     function manyPlayersCanPlay() {
-        return getActivePlayersCount() > playersTreshold;
+      return getActivePlayersCount() > playersTreshold;
     }
 
-    function getAllIn(){
-        // bet(player.stack);
+    function getAllIn() {
+      // bet(player.stack);
       bet(Math.round(minBet + (player.stack * allInStep)));
     }
 
@@ -70,16 +81,16 @@ module.exports = {
       //All in!
       getAllIn();
     } else if (!manyPlayersCanPlay()) {
-        if (isCardNotEmpty() && isPairCards() && isHighCardForLessPeoplePresent()) {
-          //All in!
-          getAllIn();
-        } else if (/*isBetNotBig() &&*/ isCardNotEmpty() && isHighCardPresent()) {
-            bet(minBet/* + game_state.minimum_raise*/);
-        } else {
-            bet(0);
-        }
-    } else {
+      if (isCardNotEmpty() && isPairCards() && isHighCardForLessPeoplePresent()) {
+        //All in!
+        getAllIn();
+      } else if (/*isBetNotBig() &&*/ isCardNotEmpty() && isHighCardPresent()) {
+        bet(minBet/* + game_state.minimum_raise*/);
+      } else {
         bet(0);
+      }
+    } else {
+      bet(0);
     }
   },
 
