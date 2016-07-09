@@ -19,7 +19,7 @@ module.exports = {
 
     function getMinBetForKeepPlaying() {
       //return game_state.players.reduce(function (p, n) { return n.bet > p ? n.bet : p }, 0);
-        return game_state.current_buy_in;
+      return game_state.current_buy_in;
     }
 
     function getGameBetRound() {
@@ -85,8 +85,8 @@ module.exports = {
     }
 
     function manyPlayersCanPlay() {
-      //return getActivePlayersCount() > playersTreshold;
-      return true;
+      return getActivePlayersCount() > playersTreshold;
+      // return true;
     }
 
     function getAllIn() {
@@ -115,4 +115,3 @@ module.exports = {
 
   }
 };
-
