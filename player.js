@@ -17,7 +17,8 @@ module.exports = {
     var player = game_state.players[game_state.in_action];
 
     function getMinBetForKeepPlaying() {
-      return game_state.players.reduce(function (p, n) { return n.bet > p ? n.bet : p }, 0);
+      //return game_state.players.reduce(function (p, n) { return n.bet > p ? n.bet : p }, 0);
+        return game_state.current_buy_in;
     }
 
     function isCardNotEmpty() {
@@ -52,7 +53,7 @@ module.exports = {
     function isPostFlop() {
       return game_state.community_cards.length > 0;
     }
-    
+
     function isAnyPlaybleCombination() {
       indetifier.setCards(player.hole_cards, game_state.community_cards);
       return indetifier.isPair() || indetifier.isTriple() || indetifier.isTwoPairs() || indetifier.isKare() || indetifier.isFullHouse();
@@ -69,8 +70,8 @@ module.exports = {
     }
 
     function manyPlayersCanPlay() {
-      return getActivePlayersCount() > playersTreshold;
-      //return true;
+      //return getActivePlayersCount() > playersTreshold;
+      return true;
     }
 
     function getAllIn() {
