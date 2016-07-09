@@ -1,10 +1,9 @@
 var NAME = "Crazy Penguins";
 var indetifier = require('./indetifier');
-global.map = global.map || [];
 
 module.exports = {
 
-  VERSION: "0.2.2",
+  VERSION: "0.2.1",
 
   bet_request: function (game_state, bet) {
     var highCards = ['10', 'J', 'Q', 'K', 'A'];
@@ -18,22 +17,7 @@ module.exports = {
     var player = game_state.players[game_state.in_action];
 
     function getMinBetForKeepPlaying() {
-      //return game_state.players.reduce(function (p, n) { return n.bet > p ? n.bet : p }, 0);
-      return game_state.current_buy_in;
-    }
-
-    function getGameBetRound() {
-      var round = map[game_state.game_id];
-      if (round != undefined) {
-        round++;
-      } else {
-        map = [];
-        round = 0;
-      }
-
-      map[game_state.game_id] = round;
-
-      return round;
+      return game_state.players.reduce(function (p, n) { return n.bet > p ? n.bet : p }, 0);
     }
 
     function isCardNotEmpty() {
@@ -68,10 +52,10 @@ module.exports = {
     function isPostFlop() {
       return game_state.community_cards.length > 0;
     }
-
+    
     function isAnyPlaybleCombination() {
       indetifier.setCards(player.hole_cards, game_state.community_cards);
-      return (indetifier.isPair() && isHighCardPresent()) || indetifier.isTriple() || indetifier.isTwoPairs() || indetifier.isKare() || indetifier.isFullHouse();
+      return indetifier.isPair() || indetifier.isTriple() || indetifier.isTwoPairs() || indetifier.isKare() || indetifier.isFullHouse();
     }
 
     var minBet = getMinBetForKeepPlaying();
@@ -85,8 +69,8 @@ module.exports = {
     }
 
     function manyPlayersCanPlay() {
-      return getActivePlayersCount() > playersTreshold;
-      // return true;
+      //return getActivePlayersCount() > playersTreshold;
+      return true;
     }
 
     function getAllIn() {
@@ -94,11 +78,11 @@ module.exports = {
       bet(Math.round(minBet + (player.stack * allInStep)));
     }
 
-    if (isCardNotEmpty() && isAnyPlaybleCombination()) {
+    if (isCardNotEmpty() && isPairCards() && isHighCardPresent()) {
       //All in!
       getAllIn();
     } else if (!manyPlayersCanPlay()) {
-      if (isCardNotEmpty() && (identifier.isPair() && isHighCardForLessPeoplePresent())) {
+      if (isCardNotEmpty() && isPairCards() && isHighCardForLessPeoplePresent()) {
         //All in!
         getAllIn();
       } else if (/*isBetNotBig() &&*/ isCardNotEmpty() && isHighCardPresent()) {
