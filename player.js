@@ -101,7 +101,7 @@ module.exports = {
       if (isCardNotEmpty() && (indetifier.isPair() && isHighCardForLessPeoplePresent())) {
         //All in!
         getAllIn();
-      } else if (/*isBetNotBig() &&*/ isCardNotEmpty() && isHighCardPresent()) {
+      } else if (/*isBetNotBig() &&*/ isCardNotEmpty() && isHighCardPresent() && getGameBetRound() < 3) {
         bet(minBet/* + game_state.minimum_raise*/);
       } else {
         bet(0);
