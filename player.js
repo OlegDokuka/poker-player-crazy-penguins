@@ -1,12 +1,17 @@
 var NAME = "Crazy Penguins";
 module.exports = {
 
-  VERSION: "0.0.2",
+  VERSION: "0.0.3",
 
   bet_request: function (game_state, bet) {
-    //var player = game_state.players[]
+    var player = game_state.players[game_state]
     var maxbet = game_state.players.reduce(function (p, n) { return n.bet > p ? n.bet : p }, 0);
-    bet(maxbet + game_state.minimum_raise);
+
+    if (player.hole_cards[0].rank == player.hole_cards[1]) {
+      bet(maxbet + game_state.minimum_raise);
+    } else {
+      bet(0);
+    }
   },
 
   showdown: function (game_state) {
