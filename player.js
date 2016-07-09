@@ -71,7 +71,7 @@ module.exports = {
 
     function isAnyPlaybleCombination() {
       indetifier.setCards(player.hole_cards, game_state.community_cards);
-      return (indetifier.isPair() && isHighCardPresent()) || indetifier.isTriple() || indetifier.isTwoPairs() || indetifier.isKare() || indetifier.isFullHouse() || identifier.isFlush();
+      return (indetifier.isPair() && isHighCardPresent()) || indetifier.isTriple() || indetifier.isTwoPairs() || indetifier.isKare() || indetifier.isFullHouse();
     }
 
     var minBet = getMinBetForKeepPlaying();
