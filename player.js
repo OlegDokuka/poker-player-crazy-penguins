@@ -1,7 +1,7 @@
 var NAME = "Crazy Penguins";
 module.exports = {
 
-  VERSION: "0.0.3",
+  VERSION: "0.0.4",
 
   bet_request: function (game_state, bet) {
     var player = game_state.players[game_state]
@@ -10,7 +10,7 @@ module.exports = {
     if (player.hole_cards[0].rank == player.hole_cards[1]) {
       bet(maxbet + game_state.minimum_raise);
     } else {
-      bet(0);
+      bet(game_state.minimum_raise);
     }
   },
 
