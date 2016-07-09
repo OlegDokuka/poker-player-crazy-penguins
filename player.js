@@ -1,7 +1,7 @@
 var NAME = "Crazy Penguins";
 module.exports = {
 
-  VERSION: "0.0.6",
+  VERSION: "0.0.7",
 
   bet_request: function (game_state, bet) {
     var player = game_state.players[game_state.in_action];
