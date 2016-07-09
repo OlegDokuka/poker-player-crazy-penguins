@@ -1,7 +1,7 @@
 var NAME = "Crazy Penguins";
 module.exports = {
 
-  VERSION: "0.0.9",
+  VERSION: "0.0.6",
 
   bet_request: function (game_state, bet) {
     var highCards = ['10', 'J', 'Q', 'K', 'A'];
@@ -41,13 +41,13 @@ module.exports = {
           }
 
     if (isCardNotEmpty() && isPairCards()) {
-      if (isSmallCardPresent()) {
+      // if (isSmallCardPresent()) {
         //30% of all in!
-        bet(Math.round(player.stack / 3));
-      } else {
+        // bet(Math.round(player.stack / 3));
+      // } else {
         //All in!
         bet(player.stack);
-      }
+      // }
     } else if (isBetNotBig() && isCardNotEmpty() && isHighCardPresent()) {
       bet(minBet + game_state.minimum_raise);
     } else {
