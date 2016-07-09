@@ -48,10 +48,10 @@ module.exports = {
     isKare: function () {
         for (var i = 0; i < this.holdCardsRank.length; i++) {
             if (this.counts[this.holdCardsRank[i]] > 3) {
-                return this.holdCardsRank[i];
+                return true;
             }
         }
-        return -1;
+        return false;
     },
     isFullHouse: function () {
         for (var i = 0; i < this.holdCardsRank.length; i++) {
